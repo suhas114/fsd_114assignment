@@ -1,0 +1,18 @@
+<h1>Add Employee</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    Name: <input type="text" name="name" required><br>
+    Email: <input type="email" name="email" required><br>
+    Mobile No: <input type="text" name="mobile_no" required><br>
+    Designation: <input type="text" name="designation" required><br>
+    Gender: 
+    <select name="gender" required>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="O">Other</option>
+    </select><br>
+    Course: <input type="text" name="course" required><br>
+    Image: <input type="file" name="image" accept="image/*" required><br>
+    <button type="submit">Add</button>
+</form>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
