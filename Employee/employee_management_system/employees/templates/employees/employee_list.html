@@ -10,7 +10,7 @@
             <th>Gender</th>
             <th>Course</th>
             <th>Image</th>
-            <th>Actions</th> <!-- New column for actions -->
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -19,17 +19,21 @@
             <td>{{ employee.id }}</td>
             <td>{{ employee.name }}</td>
             <td>{{ employee.email }}</td>
-            <td>{{ employee.mobile }}</td>
+            <td>{{ employee.mobile_no }}</td>
             <td>{{ employee.designation }}</td>
             <td>{{ employee.gender }}</td>
             <td>{{ employee.course }}</td>
             <td>
-                <img src="{{ employee.image.url }}" alt="Employee Image" style="width: 50px; height: 50px;">
+                {% if employee.image %}
+                    <img src="{{ employee.image.url }}" alt="Employee Image" style="width: 50px; height: 50px;">
+                {% endif %}
             </td>
             <td>
-                <!-- Add Edit and Delete links -->
-                <a href="{% url 'edit_employee' employee.id %}">Edit</a> |
-                <a href="{% url 'delete_employee' employee.id %}" onclick="return confirm('Are you sure you want to delete this employee?')">Delete</a>
+                <a href="{% url 'edit_employee' employee.id %}">Edit</a>
+                <form method="post" action="{% url 'delete_employee' employee.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this employee?')">Delete</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
